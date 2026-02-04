@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  localai:
+    image: ghcr.io/go-skynet/llama.cpp:latest
+    # Note: pick a LocalAI or text-generation-webui image that suits your model and hardware
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_ENV=${PINECONE_ENV}
+      - INDEX_NAME=${INDEX_NAME}
+      - API_TOKEN=${API_TOKEN}
+    depends_on:
+      - localai
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_TOKEN=${API_TOKEN}
+    depends_on:
+      - backend
