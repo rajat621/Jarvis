@@ -4,7 +4,7 @@ This project implements an enterprise-style personal assistant powered by a self
 
 Quick start
 
-1. Copy `.env.example` to `.env` and fill in Pinecone keys and `API_TOKEN`.
+1. Copy `env.example` to `.env` and fill in Pinecone keys and `API_TOKEN`.
 2. Start Local LLaMA service (LocalAI/text-generation-webui) locally or via Docker (see `docker-compose.yml`).
 3. Build and run with Docker Compose: `docker-compose up --build` or run services directly.
 4. Ingest knowledge: `python ingest.py`.
@@ -22,3 +22,4 @@ Features
 Notes
 
 - This is a demo. Replace the in-memory session store with Redis for production, and secure secrets appropriately.
+
